@@ -52,4 +52,8 @@ for(let obj of student)
     console.log(obj);
 }
 // Sử dụng destructuring, forEach, arrow function
-
+function display2({name,age})
+{
+    console.log(name + ":" + age);
+}
+student.forEach(obj => display2(obj));
