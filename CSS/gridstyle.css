@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    column-gap: 20px;
+    row-gap: 10px;
+}
+.div1{background-color: coral; padding: 20px; display: flex; justify-content: center;}
+.div2{background-color: cornflowerblue; padding: 20px; display: flex; justify-content: center;}
+.div3{background-color: cyan; padding: 20px; display: flex; justify-content: center;}
+.div4{background-color: darkgray; padding: 20px; display: flex; justify-content: center;}
+.div5{background-color: darkred; padding: 20px; display: flex; justify-content: center;}
+.div6{background-color: yellowgreen; padding: 20px; display: flex; justify-content: center;}

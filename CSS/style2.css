@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: sans-serif;
+    
+}
+ul{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+}
+li{
+    padding: 10px 30px;
+    border: 1px solid black;
+}
+a{
+    color: black;
+    text-decoration: none;
+    display: inline-block;
+}
