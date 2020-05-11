@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.todoList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid green;
+    margin: 10px auto;
+    width: 40%;
+    font-family: sans-serif;
+}
+.todoList h1{
+    color: green;
+    font-weight: 500;
+    border-bottom: 1px solid green;
+}
+.todoList input{
+    padding: 10px 35px;
+    margin-top: 20px;
+    width: 80%;
+}
+.todoListRow{
+    display: flex;
+    background: #DDD;
+    width: 80%;
+    padding: 10px;
+    margin: 10px 5px;
+}
+.todoItem{
+    padding: 10px 35px;
+    text-align: center;
+}
+.done{
+    text-decoration: line-through;
+    opacity: 0.4;
+    
+}
