@@ -7,10 +7,17 @@ import DeleteImg from '../img/delete.svg';
 import ClosedImg from '../img/close.svg';
 var classNames = require('classnames');
 class Todoitem2 extends Component{
-    state={
-        content:this.props.item.content,
-        edit: false
-    }
+    // componentDidMount(){
+    //     this.setState({
+    //         content:this.props.item.content,
+    //         edit: false
+    //     })
+    // }
+    state=({
+        content: this.props.item.content,
+        edit: false,
+        flag: true
+    })
     edit(index){
         return(event)=>{
           this.setState({
@@ -32,7 +39,8 @@ class Todoitem2 extends Component{
             if(text!==""){
                 this.setState({
                   edit: false,
-                  content: text
+                  content: text,
+                  flag: false
                 })
             }
             else{
@@ -64,6 +72,7 @@ class Todoitem2 extends Component{
     render(){
         const {item, filter, index} = this.props;
         const {edit} = this.state;
+
         let src = item.isDone === true ? CheckedImg : CheckImg
         return(
             <>
@@ -75,7 +84,7 @@ class Todoitem2 extends Component{
                         <div className = {classNames('item',{'active':item.isDone})}>
                             <img src={src} alt='' onClick={this.props.onItemClick}/>
                             <div className="task" onDoubleClick={this.edit(index)}>
-                                {this.state.content}
+                                {this.state.flag === true ? item.content : this.state.content}
                             </div>
                             <img src={DeleteImg} alt='' onClick={this.props.remove}/>
                         </div>}
@@ -107,7 +116,8 @@ class Todoitem2 extends Component{
 Todoitem2.propTypes = {
     item: PropTypes.shape({
         content: PropTypes.string,
-        isDone: PropTypes.bool
+        isDone: PropTypes.bool,
+        inTrash: PropTypes.bool
     }) 
 
 }

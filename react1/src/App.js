@@ -51,8 +51,8 @@ class App extends Component {
         this.setState({
           newItem: '',
           TodoItem:[
-            {content: text, isDone: false},
-            ...this.state.TodoItem
+            ...this.state.TodoItem,
+            {content: text, isDone: false, inTrash: false}
           ]
         })
       }
@@ -65,8 +65,8 @@ class App extends Component {
         this.setState({
           newItem: '',
           TodoItem:[
-            {content: text, isDone: false},
-            ...this.state.TodoItem
+            ...this.state.TodoItem,
+            {content: text, isDone: false}
           ]
         })
       }
