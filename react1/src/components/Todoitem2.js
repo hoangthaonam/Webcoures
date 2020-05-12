@@ -58,7 +58,8 @@ class Todoitem2 extends Component{
             if(text!==""){
                 this.setState({
                     edit: false,
-                    content: text
+                    content: text,
+                    flag: false
                 })
             }
             else{
