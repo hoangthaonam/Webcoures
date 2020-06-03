@@ -1,0 +1,19 @@
+form(action="/movie/search" method="GET")
+    label Tìm Kiếm
+    input(type="text" name="name")
+    button Search
+a(href="/movie/create") Add New Movie
+table
+    thead
+        tr
+            td id
+            td name
+            td rating
+            td isLove
+    tbody
+    each item in data
+        tr
+            td= item.id
+            td= item.name
+            td= item.rating
+            td= item.isLove
