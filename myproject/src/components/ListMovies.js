@@ -2,6 +2,7 @@ import React from 'react';
 import MovieCard from './MovieCard'
 import {Row, Col} from 'reactstrap'
 import FavoriteList from './FavoriteList'
+const axios = require('axios').default;
 
 class ListMovies extends React.Component {
     constructor() {
@@ -11,10 +12,11 @@ class ListMovies extends React.Component {
         }
     }
     componentDidMount(){
-        this.searchMovies(this.props.data);
+        // this.searchMovies(this.props.data);
         // this.setState({
         //     data: this.props.data
         // })
+        this.getMovie();
     }
     changeLove = (id) => {
         let {data} = this.state;
@@ -36,36 +38,48 @@ class ListMovies extends React.Component {
             data: [...data]
         })
     }
-    searchMovies = async (data) => {
-        let result = [];
-        for(let movie of data){
-            const url = `https://api.themoviedb.org/3/search/movie?api_key=d6a99b9d75c8d1b238d0ddec239f8b53&language=en-US&query=${movie.name}&page=1&include_adult=false`;
-            try {
-                let res = await fetch(url);
-                let data  = await res.json();
-                data = data.results.filter((item)=>{
-                    if(item.hasOwnProperty('poster_path') && item.poster_path!==null) return true;
-                    else return false
-                })
-                // console.log(data)
-                let max = 0;
-                let temp;
-                for(let item of data){
-                    if(item.popularity>max){
-                        max=item.popularity;
-                        temp = item;
-                    }
-                }
-                temp.isLove = false;
-                result.push(temp)
-            }catch(err){
-                console.error(err);
-            }
+    getMovie = async ()=>{
+        let result;
+        try {
+          const response = await axios.get('http://localhost:3001/api/movie');
+          result = response.data;
+        } catch (error) {
+          console.error(error);
         }
         this.setState({
             data:[...result]
         })
-    }
+      }
+    // searchMovies = async (data) => {
+    //     let result = [];
+    //     for(let movie of data){
+    //         const url = `https://api.themoviedb.org/3/search/movie?api_key=d6a99b9d75c8d1b238d0ddec239f8b53&language=en-US&query=${movie.name}&page=1&include_adult=false`;
+    //         try {
+    //             let res = await fetch(url);
+    //             let data  = await res.json();
+    //             data = data.results.filter((item)=>{
+    //                 if(item.hasOwnProperty('poster_path') && item.poster_path!==null) return true;
+    //                 else return false
+    //             })
+    //             // console.log(data)
+    //             let max = 0;
+    //             let temp;
+    //             for(let item of data){
+    //                 if(item.popularity>max){
+    //                     max=item.popularity;
+    //                     temp = item;
+    //                 }
+    //             }
+    //             temp.isLove = false;
+    //             result.push(temp)
+    //         }catch(err){
+    //             console.error(err);
+    //         }
+    //     }
+    //     this.setState({
+    //         data:[...result]
+    //     })
+    // }
     render(){
         const {data} = this.state;
         const favorite = data.filter(item=>item.isLove)

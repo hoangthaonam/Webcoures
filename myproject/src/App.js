@@ -22,9 +22,9 @@ function App() {
     {name: "pacific rim", rating: 0, isLove: false},
     {name: "The Lion King", rating: 0, isLove: false},
   ]
-  const users = [
-    {id: 1, username:"htn", password:"123",isLoggin:false}
-  ]
+  // const users = [
+  //   {id: 1, username:"htn", password:"123",isLoggin:false}
+  // ]
   // localStorage.setItem("movies",JSON.stringify(data))
   return (
     <Router>
