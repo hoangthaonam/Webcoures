@@ -1,5 +1,8 @@
 import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
+import {Link} from 'react-router-dom';
+
+const axios = require('axios').default;
 var classNames = require('classnames');
 
 class MovieCard extends React.Component {
@@ -9,25 +12,12 @@ class MovieCard extends React.Component {
           rating: 0,
           temp: 0
         };
+        this.url = 'http://localhost:3001/api/movie/addLove';
       }
     
-    onClickLove = ()=>{
-        this.setState({
-            isLove: !this.state.isLove
-        })
-        this.props.changeLove(this.props.item.id);
-        // if(localStorage.getItem("favoritelist")===null){
-        //     let list = [];
-        //     list.push(this.state);
-        //     localStorage.setItem("favoritelist",JSON.stringify(list))
-        // }
-        // else{
-        //     let list = [];
-        //     list = JSON.parse(localStorage.getItem("favoritelist"));
-        //     list.push(this.state);
-        //     localStorage.setItem("favoritelist",JSON.stringify(list))
-        //     console.log(list)
-        // }
+    onClickLove = async ()=>{
+        let response = await axios.post(this.url, {movieId: this.props.item._id, userId: JSON.parse(localStorage.getItem('auth'))});
+        this.props.changeLove(this.props.item._id,response.data);
     }
     onStarClick = (nextValue, prevValue, name)=>{
         this.setState({rating: nextValue, temp: nextValue});  
@@ -39,16 +29,13 @@ class MovieCard extends React.Component {
     onStarHoverOut = (nextValue, prevValue, name)=>{
         this.setState({rating: this.state.temp});  
     }
-    componentDidMount(){
-        this.setState({rating: this.props.rating})
-    }
-    
     render() {
         const { rating } = this.state;
         const { item } = this.props;
+        // console.log(item.isLove)
         return (
             <div className="card">
-                <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${item.poster_path}`} className="card-img-top" alt="..."/>
+                <Link to = {`/details/${item._id}`} ><img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${item.poster_path}`} className="card-img-top" alt="..."/></Link>
                 <div className="card-body">
                     {item.title && 
                         <h5 className="card-title text-uppercase">{item.title.length < 22 ? item.title : item.title.substr(0,15)+'...'}</h5>

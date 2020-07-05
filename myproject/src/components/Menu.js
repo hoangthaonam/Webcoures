@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -10,13 +11,6 @@ import {
   NavLink,
 } from 'reactstrap';
 import auth from './Auth'
-
-const links = [
-  { path: '#home', text: 'Home' },
-  { path: '#cata', text: 'Categories' },
-  { path: '#busns', text: 'Adds' },
-  { path: '/login', text: 'LOGIN' },
-];
 
 class Menu extends Component {
   constructor(props) {
@@ -43,20 +37,35 @@ class Menu extends Component {
     return (
       <div>
         <Navbar className="fixed-top" color="dark" dark expand="md">
-          <NavbarBrand href="/">MovieCard</NavbarBrand>
+          <NavbarBrand href="/home">MovieCard</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              {links.map((item,index)=>{
-                return(
-                <NavItem key={index}>
-                  <NavLink className= "menu-item">{item.text}</NavLink>
+                {auth.isAuthenticated() === false ? 
+                <>
+                  <NavItem>
+                    <NavLink className= "menu-item" href='/'>Login</NavLink>
+                  </NavItem>
+                  <NavItem>
+                  <NavLink className= "menu-item" href='/register'>Register</NavLink>
                 </NavItem>
-                )
-              })}
-              <NavItem className = "menu-item" onClick={this.handleLogoutClick}>
-                  <NavLink>Logout</NavLink>
-                </NavItem>
+                </>
+                  :
+                  <>
+                  <NavItem>
+                    <NavLink className= "menu-item" href='/home'>Home</NavLink>
+                  </NavItem>
+
+                  <NavItem>
+                    <NavLink className= "menu-item" href='/add'>Add</NavLink>
+                  </NavItem>
+                  
+                  <NavItem className = "menu-item" onClick={this.handleLogoutClick}>
+                    <NavLink>Logout</NavLink>
+                  </NavItem>
+                  </>
+                }
+
             </Nav>
           </Collapse>
         </Navbar>

@@ -5,23 +5,16 @@ import '../node_modules/font-awesome/css/font-awesome.min.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Menu from './components/Menu'
+import Add from './components/Add'
 import Content from './components/Content'
 import Login from './components/Login'
 import PrivateRoute from './components/PrivateRoute'
+import Register from './components/Register'
+import Details from './components/Details'
+
 
 function App() {
-  const data = [
-    {name: "Avengers: Infinity War", rating: 0, isLove: true},
-    {name: "Avengers: Endgame", rating: 0, isLove: false},
-    {name: "Inception", rating: 0, isLove: true},
-    {name: "Hobbs And Shaw", rating: 0, isLove: false},
-    {name: "Frozen II", rating: 0, isLove: false},
-    {name: "1917", rating: 0, isLove: false},
-    {name: "Parasite", rating: 0, isLove: false},
-    {name: "Joker", rating: 0, isLove: false},
-    {name: "pacific rim", rating: 0, isLove: false},
-    {name: "The Lion King", rating: 0, isLove: false},
-  ]
+  // let { movieId } = React.useParams();
   // const users = [
   //   {id: 1, username:"htn", password:"123",isLoggin:false}
   // ]
@@ -35,10 +28,18 @@ function App() {
         <Route path = "/" exact>
           <Login/>
         </Route>
-        <PrivateRoute path = "/home" exact>
-          <Content data = {data}/>
+        <Route path = "/register" exact>
+          <Register/>
+        </Route>
+        <PrivateRoute path = "/home" >
+          <Content/>
         </PrivateRoute>
-        {/* <Route><Content data = {data}/></Route> */}
+        <PrivateRoute path = "/add" exact>
+          <Add buttonLabel={'Add'}/>
+        </PrivateRoute>
+        <PrivateRoute path = "/details/:movieId" exact>
+          <Details />
+        </PrivateRoute>
       </Switch>
     </div>
     </Router>
